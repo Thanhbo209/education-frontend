@@ -18,6 +18,15 @@ import SubjectsList from "@/pages/subjects/list";
 import SubjectsCreate from "@/pages/subjects/create";
 import { dataProvider } from "@/providers/data";
 
+/**
+ * Root application component that configures Refine providers, routing, resources, and global UI.
+ *
+ * Sets up browser routing, theme and devtools providers, Refine core with data/notification/router providers,
+ * application resources (dashboard and subjects), nested routes for the dashboard and subjects pages, and global
+ * UI elements such as the Toaster, command bar, unsaved-changes notifier, and document title handler.
+ *
+ * @returns The root JSX element that renders the configured application.
+ */
 function App() {
   return (
     <BrowserRouter>
