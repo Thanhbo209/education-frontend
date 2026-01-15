@@ -160,7 +160,6 @@ const ClassesCreate = () => {
                     </FormItem>
                   )}
                 />
-
                 <FormField
                   control={control}
                   name="name"
@@ -179,7 +178,6 @@ const ClassesCreate = () => {
                     </FormItem>
                   )}
                 />
-
                 <div className="grid sm:grid-cols-2 gap-4">
                   <FormField
                     control={control}
@@ -248,7 +246,6 @@ const ClassesCreate = () => {
                     )}
                   />
                 </div>
-
                 <div className="grid sm:grid-cols-2 gap-4">
                   <FormField
                     control={control}
@@ -305,7 +302,6 @@ const ClassesCreate = () => {
                     )}
                   />
                 </div>
-
                 <FormField
                   control={control}
                   name="description"
@@ -324,10 +320,13 @@ const ClassesCreate = () => {
                     </FormItem>
                   )}
                 />
-
                 <Separator />
-
-                <Button type="submit" size="lg" className="w-full">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? (
                     <div className="flex gap-1">
                       <span>Creating Class...</span>

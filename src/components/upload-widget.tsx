@@ -46,7 +46,12 @@ function UploadWidget({
           clientAllowedFormats: ["png", "jpg", "jpeg", "webp"],
         },
         (error, result) => {
-          if (!error && result.event === "success") {
+          if (error) {
+            console.error("Upload failed:", error);
+            // Optionally: notify user via toast/notification
+            return;
+          }
+          if (result.event === "success") {
             const payload: UploadWidgetValue = {
               url: result.info.secure_url,
               publicId: result.info.public_id,
@@ -89,13 +94,16 @@ function UploadWidget({
         const params = new URLSearchParams();
         params.append("token", deleteToken);
 
-        await fetch(
+        const response = await fetch(
           `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/delete_by_token`,
           {
             method: "POST",
             body: params,
           }
         );
+        if (!response.ok) {
+          throw new Error(`Delete failed with status ${response.status}`);
+        }
       }
     } catch (error) {
       console.error("Failed to remove image from Cloudinary", error);
