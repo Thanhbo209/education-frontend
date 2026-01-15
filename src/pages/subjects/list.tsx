@@ -19,7 +19,7 @@ import { DataTable } from "@/components/refine-ui/data-table/data-table";
 import { ShowButton } from "@/components/refine-ui/buttons/show";
 
 import { Subject } from "@/types";
-import { DEPARTMENTS_OPTIONS } from "@/constants";
+import { DEPARTMENT_OPTIONS } from "@/constants";
 
 const SubjectListPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -156,7 +156,7 @@ const SubjectListPage = () => {
 
               <SelectContent>
                 <SelectItem value="all">All Departments</SelectItem>
-                {DEPARTMENTS_OPTIONS.map((department) => (
+                {DEPARTMENT_OPTIONS.map((department) => (
                   <SelectItem key={department.value} value={department.value}>
                     {department.label}
                   </SelectItem>
