@@ -12,16 +12,16 @@ const buildHttpError = async (response: Response): Promise<HttpError> => {
   let message = "Request Fail";
 
   try {
-    const payload = (await response.json()) as {message?: string};
-    if(payload?.message)
-  } catch {
-      // Ignore errors
+    const payload = (await response.json()) as { message?: string };
+    if (payload?.message) message = payload.message;
+  } catch (e) {
+    console.log(e);
   }
 
   return {
     message,
-    statusCode: response.status
-  }
+    statusCode: response.status,
+  };
 };
 
 const options: CreateDataProviderOptions = {
@@ -48,15 +48,14 @@ const options: CreateDataProviderOptions = {
     },
 
     mapResponse: async (response) => {
-      if(!response.ok) throw await buildHttpError(response)
+      if (!response.ok) throw await buildHttpError(response);
       const payload: ListResponse = await response.json();
 
       return payload.data ?? [];
     },
 
     getTotalCount: async (response) => {
-      
-      if(!response.ok) throw await buildHttpError(response)
+      if (!response.ok) throw await buildHttpError(response);
       const payload: ListResponse = await response.clone().json();
 
       return payload.pagination?.total ?? payload.data?.length ?? 0;
